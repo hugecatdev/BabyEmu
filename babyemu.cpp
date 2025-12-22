@@ -10,7 +10,7 @@ using namespace std;
 
 typedef uint16_t babyword_t;
 
-const size_t BABYMEM_SIZE = 32;
+const size_t BABYMEM_SIZE = 64;
 
 map<string, babyword_t> opcodes = {
 	{"LDA", 0x0},

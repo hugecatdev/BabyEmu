@@ -172,7 +172,7 @@ void write_code(babyword_t* memory, size_t size, string code) {
 	}
 }
 
-long long eval(babyword_t* memory, int size, bool debug = true) {
+long long eval(babyword_t* memory, size_t size, bool debug) {
 	int ip = 0;
 	long long instr_count = 0;
 	babyword_t accumulator = 0;
@@ -292,20 +292,20 @@ long long eval(babyword_t* memory, int size, bool debug = true) {
 
 void write_defaults(babyword_t *memory, size_t size) {
 	write_code(memory, size,
-		"counter: ds 5\n"
-		"one:     ds 1\n"
+		"counter: ds 5;\n"
+		"one:     ds 1;\n"
 		"ENT\n"
-		"loop:\n"            // метка на адресе 0
-		"LDA (counter)\n"    // 0
-		"IPRT\n"             // 1
-		"NEG\n"              // 2
-		"ADD (one)\n"        // 3: ACC = -counter + 1
-		"NEG\n"              // 4: ACC = counter - 1
-		"STA (counter)\n"    // 5
-		"JNP (done)\n"       // 6: если <= 0, выходим
-		"JMP (loop)\n"       // 7: иначе повторяем
-		"done:\n"            // метка на адресе 8
-		"HLT\n"              // 8
+		"loop:\n"             // метка на адресе 0
+		"LDA (counter);\n"    // 0
+		"IPRT;\n"             // 1
+		"NEG;\n"              // 2
+		"ADD (one);\n"        // 3: ACC = -counter + 1
+		"NEG;\n"              // 4: ACC = counter - 1
+		"STA (counter);\n"    // 5
+		"JNP (done);\n"       // 6: если <= 0, выходим
+		"JMP (loop);\n"       // 7: иначе повторяем
+		"done:\n"             // метка на адресе 8
+		"HLT;\n"              // 8
 	);
 }
 
@@ -322,7 +322,7 @@ int main() {
 
 	cout << "\n\nRuntime (with debug message):\n\n";
 
-	eval(memory, BABYMEM_SIZE);
+	eval(memory, BABYMEM_SIZE, true);
 
 	auto start = chrono::high_resolution_clock::now();
 
